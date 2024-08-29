@@ -1,0 +1,52 @@
+<!-- 휴가 캘린더 https://junesker.tistory.com/93 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="importmap">
+      {
+        "imports": {
+          "@fullcalendar/core": "https://cdn.skypack.dev/@fullcalendar/core@6.1.15",
+          "@fullcalendar/daygrid": "https://cdn.skypack.dev/@fullcalendar/daygrid@6.1.15"
+        }
+      }
+    </script>
+    <script type="module">
+      import { Calendar } from "@fullcalendar/core";
+      import dayGridPlugin from "@fullcalendar/daygrid";
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const calendarEl = document.getElementById("calendar");
+        const calendar = new Calendar(calendarEl, {
+          plugins: [dayGridPlugin],
+          headerToolbar: {
+            left: "prev",
+            center: "title",
+            right: "next today",
+          },
+          eventSources: [
+            {
+              events: [{ title: "event", start: "2024-08-01" }],
+              color: "black",
+              textColor: "yellow",
+            },
+          ],
+          selectable: true, // 드래그로 날짜 선택 가능
+          select: function (info) {
+            // 선택된 날짜 범위 처리
+            const startDate = info.startStr;
+            const endDate = info.endStr;
+            alert(
+              `Selected start date: ${startDate}\nSelected end date: ${endDate}`
+            );
+            // 선택된 날짜 범위를 원하는 대로 처리
+          },
+        });
+        calendar.render();
+      });
+    </script>
+  </head>
+  <body>
+    <div id="calendar" style="width: 30%"></div>
+    <div>여기서 휴가추가</div>
+  </body>
+</html>
